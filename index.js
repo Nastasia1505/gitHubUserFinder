@@ -1,23 +1,6 @@
 const seachInput = document.querySelector('.seach-input');
 const userInfo = document.querySelector('.user-info');
 
-
-function showUserInfo(response) {
-  if (!seachInput.value) {
-    userInfo.style.display = 'none'
-  } else {
-    userInfo.style.display = 'flex'
-    userInfo.innerHTML = `<img src="${response.avatar_url}"> 
-      BIO:  ${response.bio}  
-      Followers: ${response.followers}`
-    
-    console.log(response)
-  }
-}
-
-showUserInfo()
-
-
 seachInput.addEventListener('keyup', () => {
   console.log('hi')
   let user = seachInput.value;
@@ -26,9 +9,23 @@ seachInput.addEventListener('keyup', () => {
       return response.json();
     })
     .then((response) => {
-      // console.log(response)
-      // console.log(response.bio)
       showUserInfo(response)
     })
-
 })
+
+function showUserInfo(response) {
+  if (!seachInput.value) {
+    userInfo.style.display = 'none'
+  } else {
+    userInfo.style.display = 'flex'
+
+    userInfo.innerHTML = `<img src="${response.avatar_url}" class = "user-img"> <br>
+      BIO:  ${response.bio}  <br>
+      Followers: ${response.followers} <br>
+      Location: ${response.location}`
+
+    console.log(response)
+  }
+}
+
+showUserInfo()
